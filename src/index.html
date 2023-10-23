@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Day3</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <h3>Пошук</h3>
+      <input v-model="search" placeholder="Пошук за прізвищем" />
+
+      <div>
+        <h3>Додати нового студента</h3>
+        <input v-model="newStudentName" placeholder="Ім'я студента" />
+        <input v-model="newStudentGroup" placeholder="Група" />
+        <input v-model="newStudentYear" placeholder="Рік народження" />
+        <input type="checkbox" v-model="newStudentPractice" /> Практика
+        <button @click="addStudent">Додати студента</button> 
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ПІБ</th>
+            <th>Група</th>
+            <th>Рік народження</th>
+            <th>Практика</th>
+            <th>Дії</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="student in students" :key="student.id" :class="{ 'bg-primary': isMatched(student) }">
+            <td>{{ student.name }}</td>
+            <td>{{ student.group }}</td>
+            <td>{{ student.year }}</td>
+            <td>
+              <input type="checkbox" v-model="student.practice" />
+            </td>
+            <td>
+              <button @click="removeStudent(student.id)">Видалити</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
+
